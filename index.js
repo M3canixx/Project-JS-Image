@@ -51,13 +51,13 @@ const movefiles = (nameofile, classname) => {
   const dimension = getbbox(predictions);
 
   const ziplistdim = R.zip(FileNameFilter, dimension);
-  calculdimbbox(ziplistdim);
+  addinginJSON(ziplistdim);
 
   const ziplistclass = R.zip(FileNameFilter, classname);
   createandmove(ziplistclass);
 })();
 
-const docalculatebbox = ([x, [a, b, c, d]]) => {
+const doaddinginJSON = ([x, [a, b, c, d]]) => {
   object.imageInfo.push({
     imageName: x,
     originalDim: `${sizeOf(x).width} x ${sizeOf(x).width}`,
@@ -73,7 +73,7 @@ const docalculatebbox = ([x, [a, b, c, d]]) => {
   );
 };
 
-const calculdimbbox = R.map(docalculatebbox);
+const addinginJSON = R.map(doaddinginJSON);
 
 const docreatefolder = (x) =>
   R.pipe(R.nth(1), createfolder, R.andThen(R.always(x)))(x);
