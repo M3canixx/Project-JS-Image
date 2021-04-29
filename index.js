@@ -8,7 +8,6 @@ const R = require('ramda');
 const sizeOf = require('image-size');
 const pathinit = './random_pic/';
 const FileName = [];
-const FileNameAfter = []
 const object = {
   imageInfo: []
 };
@@ -16,7 +15,7 @@ const object = {
 const checkifjpg = (x) => x.slice(-4) === '.jpg';
 
 const getfiles = fs.readdirSync(pathinit).forEach((file) => {
-  FileName.push(pathinit + file)
+  FileName.push(pathinit + file);
 });
 
 const createfolder = fs.ensureDir;
@@ -38,7 +37,7 @@ const movefiles = (nameofile, classname) => {
 (async () => {
   getfiles;
 
-  FileNameFilter = R.filter(checkifjpg, FileName)
+  const FileNameFilter = R.filter(checkifjpg, FileName);
 
   const imgList = await Bromise.map(FileNameFilter, readJpg);
 
@@ -56,7 +55,6 @@ const movefiles = (nameofile, classname) => {
 
   const ziplistclass = R.zip(FileNameFilter, classname);
   createandmove(ziplistclass);
-
 })();
 
 const docalculatebbox = ([x, [a, b, c, d]]) => {
@@ -65,10 +63,8 @@ const docalculatebbox = ([x, [a, b, c, d]]) => {
     originalDim: `${sizeOf(x).width} x ${sizeOf(x).width}`,
     detectionBoxDim: `${Math.round(a + c)} x ${Math.round(b + d)}`,
     ratio:
-      (
-        (Math.round(a + c) * Math.round(b + d)) /
-        (sizeOf(x).width * sizeOf(x).width)
-      )
+      (Math.round(a + c) * Math.round(b + d)) /
+      (sizeOf(x).width * sizeOf(x).width)
   });
   fs.writeFile('image_information.json', JSON.stringify(object), 'utf8');
 };
