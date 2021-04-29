@@ -8,6 +8,7 @@ const R = require('ramda');
 const sizeOf = require('image-size');
 const pathinit = './random_pic/';
 const FileName = [];
+const FileNameAfter = []
 const object = {
   imageInfo: []
 };
@@ -15,9 +16,7 @@ const object = {
 const checkifjpg = (x) => x.slice(-4) === '.jpg';
 
 const getfiles = fs.readdirSync(pathinit).forEach((file) => {
-  if (checkifjpg(file)) {
-    FileName.push(pathinit + file);
-  }
+  FileName.push(pathinit + file)
 });
 
 const createfolder = fs.ensureDir;
@@ -39,7 +38,9 @@ const movefiles = (nameofile, classname) => {
 (async () => {
   getfiles;
 
-  const imgList = await Bromise.map(FileName, readJpg);
+  FileNameFilter = R.filter(checkifjpg, FileName)
+
+  const imgList = await Bromise.map(FileNameFilter, readJpg);
 
   // Load the model.
   const model = await cocoSsd.load();
@@ -50,11 +51,12 @@ const movefiles = (nameofile, classname) => {
   const classname = getclass(predictions);
   const dimension = getbbox(predictions);
 
-  const ziplistdim = R.zip(FileName, dimension);
+  const ziplistdim = R.zip(FileNameFilter, dimension);
   calculdimbbox(ziplistdim);
 
-  const ziplistclass = R.zip(FileName, classname);
+  const ziplistclass = R.zip(FileNameFilter, classname);
   createandmove(ziplistclass);
+
 })();
 
 const docalculatebbox = ([x, [a, b, c, d]]) => {
