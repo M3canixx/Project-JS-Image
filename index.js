@@ -66,7 +66,11 @@ const docalculatebbox = ([x, [a, b, c, d]]) => {
       (Math.round(a + c) * Math.round(b + d)) /
       (sizeOf(x).width * sizeOf(x).width)
   });
-  fs.writeFile('image_information.json', JSON.stringify(object), 'utf8');
+  fs.writeFile(
+    'image_information.json',
+    JSON.stringify(object, null, '\t'),
+    'utf8'
+  );
 };
 
 const calculdimbbox = R.map(docalculatebbox);
