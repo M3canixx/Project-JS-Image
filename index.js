@@ -58,10 +58,15 @@ const movefiles = (nameofile, classname) => {
 })();
 
 const docalculatebbox = ([x, [a, b, c, d]]) => {
-  object.image_info.push({
+  object.imageInfo.push({
     imageName: x,
-    originalDim: `${sizeOf(x).width} x ${sizeOf(x).height}`,
-    detectionBoxDim: `${Math.round(a + c)} x ${Math.round(b + d)}`
+    originalDim: `${sizeOf(x).width} x ${sizeOf(x).width}`,
+    detectionBoxDim: `${Math.round(a + c)} x ${Math.round(b + d)}`,
+    ratio:
+      (
+        (Math.round(a + c) * Math.round(b + d)) /
+        (sizeOf(x).width * sizeOf(x).width)
+      )
   });
   fs.writeFile('image_information.json', JSON.stringify(object), 'utf8');
 };
