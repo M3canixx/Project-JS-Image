@@ -9,7 +9,7 @@ const sizeOf = require('image-size');
 const pathinit = './random_pic/';
 const FileName = [];
 const object = {
-  image_info: []
+  imageInfo: []
 };
 
 const checkifjpg = (x) => x.slice(-4) === '.jpg';
