@@ -8,4 +8,4 @@ You can change the initial folder by changing the variable pathinit with your pa
 
 The algorithm creates folders, renames your jpg files, and moves it to the right folder.
 
-It will also display some informations such as : the original size of the image as well as the size of the detection box.
+It will also display some informations such as : the original size of the image as well as the size of the detection box in a JSON file.
