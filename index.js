@@ -8,6 +8,9 @@ const R = require('ramda');
 const sizeOf = require('image-size');
 const pathinit = './random_pic/';
 const FileName = [];
+const object = {
+  image_info: []
+};
 
 const checkifjpg = (x) => x.slice(-4) === '.jpg';
 
@@ -47,28 +50,20 @@ const movefiles = (nameofile, classname) => {
   const classname = getclass(predictions);
   const dimension = getbbox(predictions);
 
-  getoriginaldim(FileName);
-
   const ziplistdim = R.zip(FileName, dimension);
   calculdimbbox(ziplistdim);
 
   const ziplistclass = R.zip(FileName, classname);
   createandmove(ziplistclass);
-
 })();
 
-const dogetoriginaldim = (x) => {
-  console.log(
-    `Dimension original de ${x}: ${sizeOf(x).width} x ${sizeOf(x).height}`
-  );
-};
-
-const getoriginaldim = R.map(dogetoriginaldim);
-
 const docalculatebbox = ([x, [a, b, c, d]]) => {
-  console.log(
-    `Dimension de la boite de ${x}: ${Math.round(a + c)} x ${Math.round(b + d)}`
-  );
+  object.image_info.push({
+    imageName: x,
+    originalDim: `${sizeOf(x).width} x ${sizeOf(x).height}`,
+    detectionBoxDim: `${Math.round(a + c)} x ${Math.round(b + d)}`
+  });
+  fs.writeFile('image_information.json', JSON.stringify(object), 'utf8');
 };
 
 const calculdimbbox = R.map(docalculatebbox);
