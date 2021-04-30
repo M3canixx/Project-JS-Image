@@ -34,7 +34,7 @@ const movefiles = (nameofile, classname) => {
   );
 };
 
-(async () => {
+const main = async () => {
   getfiles;
 
   const FileNameFilter = R.filter(checkifjpg, FileName);
@@ -55,13 +55,14 @@ const movefiles = (nameofile, classname) => {
 
   const ziplistclass = R.zip(FileNameFilter, classname);
   createandmove(ziplistclass);
-})();
+};
 
 const doaddinginJSON = ([x, [a, b, c, d]]) => {
   object.imageInfo.push({
-    imageName: x,
-    originalDim: `${sizeOf(x).width} x ${sizeOf(x).width}`,
-    detectionBoxDim: `${Math.round(a + c)} x ${Math.round(b + d)}`,
+    OldName: x,
+    NewName: '',
+    OriginalDim: `${sizeOf(x).width} x ${sizeOf(x).width}`,
+    DetectionBoxDim: `${Math.round(a + c)} x ${Math.round(b + d)}`,
     ratio:
       (Math.round(a + c) * Math.round(b + d)) /
       (sizeOf(x).width * sizeOf(x).width)
@@ -85,3 +86,5 @@ const getclass = R.pipe(R.flatten, R.map(R.prop('class')));
 const getbbox = R.pipe(R.flatten, R.map(R.prop('bbox')));
 
 const createandmove = R.map(R.pipe(docreatefolder, R.andThen(domovefiles)));
+
+main();
