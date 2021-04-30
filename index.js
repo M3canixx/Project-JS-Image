@@ -62,9 +62,7 @@ const doaddinginJSON = ([x, [a, b, c, d]]) => {
       (Math.round(a + c) * Math.round(b + d)) /
       (sizeOf(x).width * sizeOf(x).width)
   };
-
   object.push(stuff);
-
   fs.writeFile(
     './image_information.json',
     JSON.stringify(object, null, '\t'),
