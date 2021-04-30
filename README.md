@@ -2,6 +2,8 @@
 
 This is an image sort algorithm... Obviously.
 
+https://github.com/xojs/xo
+
 ## Description
 
 Put your images in the random_pic folder. The algorithm will only sort files with .jpg extension. Otherwise, the files will stay in this folder and not be deleted.
