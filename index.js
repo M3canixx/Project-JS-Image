@@ -1,4 +1,3 @@
-// Note: Require the cpu and webgl backend and add them to package.json as peer dependencies.
 require('@tensorflow/tfjs-node-gpu');
 const cocoSsd = require('@tensorflow-models/coco-ssd');
 const fs = require('fs-extra');
@@ -41,20 +40,18 @@ const main = async () => {
 
   const imgList = await Bromise.map(FileNameFilter, readJpg);
 
-  // Load the model.
   const model = await cocoSsd.load();
 
-  // Classify the image.
   const predictions = await Bromise.map(imgList, (x) => model.detect(x));
 
   const classname = getclass(predictions);
   const dimension = getbbox(predictions);
 
-  const ziplistdim = R.zip(FileNameFilter, dimension);
-  addinginJSON(ziplistdim);
-
   const ziplistclass = R.zip(FileNameFilter, classname);
   createandmove(ziplistclass);
+  
+  const ziplistdim = R.zip(FileNameFilter, dimension);
+  addinginJSON(ziplistdim);
 };
 
 const doaddinginJSON = ([x, [a, b, c, d]]) => {
