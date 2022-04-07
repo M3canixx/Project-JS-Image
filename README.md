@@ -27,4 +27,5 @@ yarn install
 
 
 ## Contributing
-Me and AgnesBnr
+[M3canixx](https://github.com/M3canixx)
+[AgnesBnr](https://github.com/AgnesBnr)
