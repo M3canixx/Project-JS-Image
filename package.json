@@ -16,7 +16,7 @@
     "bluebird": "^3.7.2",
     "fs-extra": "^9.1.0",
     "image-size": "^1.0.0",
-    "jpeg-js": "^0.4.3",
+    "jpeg-js": "^0.4.4",
     "nedb": "^1.8.0",
     "python3": "^0.0.1",
     "seedrandom": "~2.4.3",
